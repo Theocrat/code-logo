@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Logo</title>
+
+    <link rel="stylesheet" href="css/page.css"></link>
+    <link rel="stylesheet" href="css/graphics.css"></link>
+
+    <script type="text/javascript" src="js/globals.js"></script>
+    <script type="text/javascript" src="js/error.js"></script>
+    <script type="text/javascript" src="js/command.js"></script>
+    <script type="text/javascript" src="js/graphics.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
+</head>
+
+<body onload="initialize()">
+    <div id="drawing-box">
+        <svg id="drawing" viewBox="-100 -100 200 200">
+            <g id="turtle"></g>
+            <g id="picture"></g>
+        </svg>
+    </div>
+
+    <div id="command-box">
+        <input type="text" id="command"/>
+    </div>
+
+    <div id="error-box" class="error-hide">
+    </div>
+</body>
+</html>

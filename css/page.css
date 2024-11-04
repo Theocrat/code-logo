@@ -1,0 +1,49 @@
+body {
+    background: #ccc;
+}
+
+#drawing-box {
+    height: calc(100vh - 48px);
+    width: 98vw;
+}
+
+#command-box {
+    height: 24px;
+    width: 98vw;
+}
+
+#drawing {
+    background: white;
+    border: 1px solid grey;
+    height: calc(100% - 8px);
+    width: 100%;
+}
+
+#command {
+    height: 100%;
+    width: 100%;
+    font-family: mono;
+    font-size: 20px;
+}
+
+#error-box {
+    position: fixed;
+    padding: 4px;
+    
+    top: 10px;
+    left: 10px;
+    height: 24px;
+    width: max(40%, 256px); /* 256 px on phone, 40% of screen on laptop */
+    
+    opacity: 80%;
+    background: #fbb;
+    border: 2px solid #e44;
+}
+
+.error-show {
+    display: block;
+}
+
+.error-hide {
+    display: none;
+}

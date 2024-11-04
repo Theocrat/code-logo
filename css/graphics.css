@@ -1,0 +1,15 @@
+path.cursor {
+    fill: white;
+    fill-opacity: 75%;
+    stroke: black;
+    stroke-width: 0.5px;
+}
+
+path.cursor:hover {
+    scale: 130%;
+}
+
+path.line {
+    stroke-width: 0.3;
+    stroke: black;
+}
