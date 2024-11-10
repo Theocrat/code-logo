@@ -1,87 +1,79 @@
-function turtleCommand_ht() {
-    turtle.hidden = true
-    renderTurtle()
-}
+function parse(tokens) {
 
-function turtleCommand_st() {
-    turtle.hidden = false
-    renderTurtle()
-}
-
-function turtleCommand_pd() {
-    turtle.down = true
-}
-
-function turtleCommand_pu() {
-    turtle.down = false
-}
-
-function turtleCommand_cs() {
-    picture.innerHTML = ""
-    turtle.x = 0
-    turtle.y = 0
-    turtle.direction = -90
-    renderTurtle()
-}
-
-function turtleCommand_fd(amount) {
-    let oldX = turtle.x
-    let oldY = turtle.y
-
-    let rad = Math.PI * turtle.direction / 180
-    turtle.x += amount * Math.cos(rad)
-    turtle.y += amount * Math.sin(rad)
-    renderTurtle()
-
-    if (turtle.down) {
-        makeLineFrom(oldX, oldY)
+    if (tokens.length == 0) {
+        let returnedItem = []
+        return returnedItem
     }
-}
 
-function turtleCommand_bk(amount) {
-    turtleCommand_fd(-amount)
-}
-
-function turtleCommand_lt(amount) {
-    turtle.direction -= amount
-    renderTurtle()
-}
-
-function turtleCommand_rt(amount) {
-    turtleCommand_lt(-amount)
-}
-
-const monadicCommands = {
-    "ht": turtleCommand_ht,
-    "st": turtleCommand_st,
-    "cs": turtleCommand_cs,
-    "pu": turtleCommand_pu,
-    "pd": turtleCommand_pd
-}
-
-const diadicCommands = {
-    "fd": turtleCommand_fd,
-    "bk": turtleCommand_bk,
-    "rt": turtleCommand_rt,
-    "lt": turtleCommand_lt
-}
-
-function execute() {
-    let parts = command.value.split(" ")
-    let opcode = parts[0]
+    let opcode = tokens[0]
 
     if (opcode in monadicCommands) {
-        monadicCommands[opcode]()
+        let commandSequence = [{ "method": monadicCommands[opcode] }]
+        let remainingText = tokens.slice(1)
+        let returnedItem = commandSequence.concat(parse(remainingText))
+        return returnedItem
     }
 
-    else if (opcode in diadicCommands && parts.length == 2) {
-        let amount = parts[1]
-        diadicCommands[opcode](amount)
+    if (opcode in diadicCommands) {
+        let commandSequence = [{
+            "method": diadicCommands[opcode],
+            "amount": tokens[1]
+        }]
+        let remainingText = tokens.slice(2)
+        let returnedItem = commandSequence.concat(parse(remainingText))
+        return returnedItem
     }
 
-    else {
-        raiseError("Unidentified Command: " + parts.join(command.value))
+    if (opcode == "repeat") {
+        let count = parseInt(tokens[1])
+        let start = tokens.indexOf("[")
+        let stop = tokens.indexOf("]") 
+
+        if (start == -1 || stop == -1) {
+            raiseError("Repeat instruction without start or stop")
+            let returnedItem = []
+            return returnedItem
+        }
+
+        let codeBlock = tokens.slice(start + 1, stop)
+        let commandSequence = []
+        for (let i = 0; i < count; i++) {
+            commandSequence = commandSequence.concat(parse(codeBlock))
+        }
+
+        let remainingText = tokens.slice(stop)
+        let returnedItem = commandSequence.concat(parse(remainingText))
+        return returnedItem
     }
+
+    if (opcode == "]") {
+        let remainingText = tokens.slice(1)
+        let returnedItem = parse(remainingText)
+        return returnedItem
+    }
+
+    raiseError(`Unexpected: ${tokens.join(" ")}`)
+    let returnedItem = []
+    return returnedItem
+
+}
+
+
+function execute() {
+    let bracketCleaned = command.value.replace("[", " [ ").replace("]", " ] ")
+    let rawTokens = bracketCleaned.trim().split(" ")
+    let tokens = rawTokens.filter(token => token != "")
+    let program = parse(tokens)
+
+    program.forEach(instruction => {
+        if ("amount" in instruction) {
+            instruction.method(instruction.amount)
+        }
+
+        else {
+            instruction.method()
+        }
+    })
 
     command.value = ""
 }
