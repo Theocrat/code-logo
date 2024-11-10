@@ -21,7 +21,8 @@ function getStopLocation(tokens) {
 
 
 function generateTokensFromCommand(text) {
-    let bracketCleaned = command.value.replaceAll("[", " [ ").replaceAll("]", " ] ")
+    let lower = command.value.toLowerCase()
+    let bracketCleaned = lower.replaceAll("[", " [ ").replaceAll("]", " ] ")
     let rawTokens = bracketCleaned.split(" ")
     let tokens = rawTokens.filter(token => token != "")
     return tokens
