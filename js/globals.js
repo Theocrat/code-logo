@@ -17,3 +17,5 @@ const turtle = {
 var command = null
 var cursor = null
 var picture = null
+
+const commandStack = []

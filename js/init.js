@@ -3,7 +3,16 @@ function initialize() {
 
     command.addEventListener("keydown", e => {
         if(e.key == "Enter") { 
+            commandStack.push(command.value)
             execute() 
+        }
+    })
+
+    command.addEventListener("keydown", e => {
+        if(e.key == "ArrowUp") { 
+            if (commandStack.length > 0) {
+                command.value = commandStack.pop()
+            }
         }
     })
 
