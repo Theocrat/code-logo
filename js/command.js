@@ -20,6 +20,26 @@ function getStopLocation(tokens) {
 }
 
 
+function generateTokensFromCommand(text) {
+    let bracketCleaned = command.value.replaceAll("[", " [ ").replaceAll("]", " ] ")
+    let rawTokens = bracketCleaned.split(" ")
+    let tokens = rawTokens.filter(token => token != "").map(token => {
+        if (token[0] == ":") {
+            let varname = token.slice(1)
+            if (varname in userVariables) {
+                return userVariables[varname]
+            }
+            raiseError(`Unknown variable: ${varname}`)
+            return 0
+        }
+        return token
+    })
+    console.log(rawTokens)
+    console.log(tokens)
+    return tokens
+}
+
+
 function parse(tokens) {
 
     if (tokens.length == 0) {
@@ -42,6 +62,17 @@ function parse(tokens) {
             "amount": tokens[1]
         }]
         let remainingText = tokens.slice(2)
+        let returnedItem = commandSequence.concat(parse(remainingText))
+        return returnedItem
+    }
+
+    if (opcode in triadicCommands) {
+        let commandSequence = [{
+            "method": triadicCommands[opcode],
+            "target": tokens[1],
+            "value": tokens[2]
+        }]
+        let remainingText = tokens.slice(3)
         let returnedItem = commandSequence.concat(parse(remainingText))
         return returnedItem
     }
@@ -83,19 +114,16 @@ function parse(tokens) {
 
 
 function execute() {
-    let bracketCleaned = command.value.replaceAll("[", " [ ").replaceAll("]", " ] ")
-    let rawTokens = bracketCleaned.split(" ")
-    let tokens = rawTokens.filter(token => token != "")
+    let tokens = generateTokensFromCommand(command.value)
     let program = parse(tokens)
-
-    console.log(`Cleaned: "${bracketCleaned}"`)
-    console.log(`Raw Tokens: [${rawTokens.join(', ')}]`)
-    console.log(`Tokens: [${tokens.join(', ')}]`)
-    console.table(program)
 
     program.forEach(instruction => {
         if ("amount" in instruction) {
             instruction.method(instruction.amount)
+        }
+
+        else if ("target" in instruction) {
+            instruction.method(instruction.target, instruction.value)
         }
 
         else {

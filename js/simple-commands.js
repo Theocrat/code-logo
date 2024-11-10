@@ -51,6 +51,10 @@ function turtleCommand_rt(amount) {
     turtleCommand_lt(-amount)
 }
 
+function turtleCommand_make(variableName, expression) {
+    userVariables[variableName] = parseInt(expression)
+}
+
 const monadicCommands = {
     "ht": turtleCommand_ht,
     "st": turtleCommand_st,
@@ -66,3 +70,6 @@ const diadicCommands = {
     "lt": turtleCommand_lt
 }
 
+const triadicCommands = {
+    "make": turtleCommand_make
+}

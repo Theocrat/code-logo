@@ -47,3 +47,15 @@ body {
 .error-hide {
     display: none;
 }
+
+button.repo {
+    display: inline-block;
+    height: 30px;
+    width: 56px;
+}
+
+#command {
+    height: 24px;
+    width: calc(98vw - 64px);
+    float: left;
+}

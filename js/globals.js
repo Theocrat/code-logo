@@ -14,8 +14,15 @@ const turtle = {
 }
 
 
+const userVariables = {}
+
+
 var command = null
 var cursor = null
 var picture = null
 
 const commandStack = []
+
+function openRepo() {
+    window.open("https://github.com/Theocrat/code-logo")
+}
