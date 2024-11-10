@@ -52,7 +52,32 @@ function turtleCommand_rt(amount) {
 }
 
 function turtleCommand_make(variableName, expression) {
-    userVariables[variableName] = parseInt(expression)
+    if (expression.length == 1) {
+        userVariables[variableName] = parseInt(expression[0])
+    }
+    else {
+        let operand = [parseInt(expression[0]), parseInt(expression[2])]
+        switch (expression[1]) {
+            case '+':
+                userVariables[variableName] = operand[0] + operand[1]
+                break
+            case '-':
+                userVariables[variableName] = operand[0] - operand[1]
+                break
+            case '*':
+                userVariables[variableName] = operand[0] * operand[1]
+                break
+            case '/':
+                userVariables[variableName] = operand[0] / operand[1]
+                break
+            case '%':
+                userVariables[variableName] = operand[0] % operand[1]
+                break
+            default:
+                raiseError(`Unexpected instruction: ${expression.join(" ")}`)
+        }
+    }
+    
 }
 
 const monadicCommands = {
@@ -70,6 +95,6 @@ const diadicCommands = {
     "lt": turtleCommand_lt
 }
 
-const triadicCommands = {
+const variadicCommands = {
     "make": turtleCommand_make
 }

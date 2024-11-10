@@ -66,14 +66,32 @@ function parse(tokens) {
         return returnedItem
     }
 
-    if (opcode in triadicCommands) {
-        let commandSequence = [{
-            "method": triadicCommands[opcode],
-            "target": tokens[1],
-            "value": tokens[2]
-        }]
-        let remainingText = tokens.slice(3)
-        let returnedItem = commandSequence.concat(parse(remainingText))
+    if (opcode in variadicCommands) {
+        let commandSequence
+        let remainingText
+        let returnedItem
+
+        if ("+-*/%".indexOf(tokens[3]) != -1) {
+            commandSequence = [{
+                "method": variadicCommands[opcode],
+                "target": tokens[1],
+                "value": [tokens[2], tokens[3], tokens[4]]
+            }]
+            remainingText = tokens.slice(5)
+            returnedItem = commandSequence.concat(parse(remainingText))
+        }
+
+        else {
+            commandSequence = [{
+                "method": variadicCommands[opcode],
+                "target": tokens[1],
+                "value": [tokens[2]]
+            }]
+            remainingText = tokens.slice(3)
+            returnedItem = commandSequence.concat(parse(remainingText))
+        }
+
+        
         return returnedItem
     }
 
