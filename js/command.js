@@ -23,19 +23,7 @@ function getStopLocation(tokens) {
 function generateTokensFromCommand(text) {
     let bracketCleaned = command.value.replaceAll("[", " [ ").replaceAll("]", " ] ")
     let rawTokens = bracketCleaned.split(" ")
-    let tokens = rawTokens.filter(token => token != "").map(token => {
-        if (token[0] == ":") {
-            let varname = token.slice(1)
-            if (varname in userVariables) {
-                return userVariables[varname]
-            }
-            raiseError(`Unknown variable: ${varname}`)
-            return 0
-        }
-        return token
-    })
-    console.log(rawTokens)
-    console.log(tokens)
+    let tokens = rawTokens.filter(token => token != "")
     return tokens
 }
 

@@ -1,3 +1,15 @@
+function evaluateToken(token) {
+    if (token[0] == ":") {
+        let varname = token.slice(1)
+        if (varname in userVariables) {
+            return userVariables[varname]
+        }
+        raiseError(`Unknown variable: ${varname}`)
+        return 0
+    }
+    return parseInt(token)
+}
+
 function turtleCommand_ht() {
     turtle.hidden = true
     renderTurtle()
@@ -24,7 +36,9 @@ function turtleCommand_cs() {
     renderTurtle()
 }
 
-function turtleCommand_fd(amount) {
+function turtleCommand_fd(arg) {
+    let amount = evaluateToken(arg)
+
     let oldX = turtle.x
     let oldY = turtle.y
 
@@ -38,17 +52,20 @@ function turtleCommand_fd(amount) {
     }
 }
 
-function turtleCommand_bk(amount) {
-    turtleCommand_fd(-amount)
+function turtleCommand_bk(arg) {
+    let amount = evaluateToken(arg)
+    turtleCommand_fd(`-${amount}`)
 }
 
-function turtleCommand_lt(amount) {
+function turtleCommand_lt(arg) {
+    let amount = evaluateToken(arg)
     turtle.direction -= amount
     renderTurtle()
 }
 
-function turtleCommand_rt(amount) {
-    turtleCommand_lt(-amount)
+function turtleCommand_rt(arg) {
+    let amount = evaluateToken(arg)
+    turtleCommand_lt(`-${amount}`)
 }
 
 function turtleCommand_make(variableName, expression) {
@@ -56,7 +73,7 @@ function turtleCommand_make(variableName, expression) {
         userVariables[variableName] = parseInt(expression[0])
     }
     else {
-        let operand = [parseInt(expression[0]), parseInt(expression[2])]
+        let operand = [expression[0], expression[2]].map(evaluateToken)
         switch (expression[1]) {
             case '+':
                 userVariables[variableName] = operand[0] + operand[1]
