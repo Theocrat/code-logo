@@ -97,6 +97,16 @@ function turtleCommand_make(variableName, expression) {
     
 }
 
+function turtleCommand_setx(arg) {
+    turtle.x = parseFloat(arg)
+    renderTurtle()
+}
+
+function turtleCommand_sety(arg) {
+    turtle.y = -parseFloat(arg)
+    renderTurtle()
+}
+
 const monadicCommands = {
     "ht": turtleCommand_ht,
     "st": turtleCommand_st,
@@ -109,7 +119,9 @@ const diadicCommands = {
     "fd": turtleCommand_fd,
     "bk": turtleCommand_bk,
     "rt": turtleCommand_rt,
-    "lt": turtleCommand_lt
+    "lt": turtleCommand_lt,
+    "setx": turtleCommand_setx,
+    "sety": turtleCommand_sety
 }
 
 const variadicCommands = {

@@ -29,6 +29,8 @@ __st__ | `st` | Show Turtle *(its supposed to be dt, but I have always hated tha
 __cs__ | `cs` | Clear Screen (resets the imagew)
 __repeat__ | `repeat (times) [(instructions)]` | Repeat *instructions* *times* times
 __make__ | `make (name) (expression)` | Assigned the value of *expression* to variable *name*
+__setx__ | `setx (value)` | Move the turtle to the x-coordinate *value*
+__sety__ | `setx (value)` | Move the turtle to the y-coordinate *value*
 
 **NOTE:** Only integer variable support has been implemented so far. Access the 7
 value of a variable using the colon operator. For instance, if the variable name
