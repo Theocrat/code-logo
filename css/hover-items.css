@@ -1,0 +1,38 @@
+.variables {
+    display: none; /* Hidden by default */
+
+    position: fixed; /* Sit on top of the page content */
+    width:  calc(60% - 2rem); /* Full width (cover the whole page) */
+    height: calc(60% - 2rem); /* Full height (cover the whole page) */
+    top: 20%;
+    left: 20%;
+    right: 0;
+    bottom: 0;
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    overflow: auto;
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fedd;
+    border: 1px solid #975;
+    border-radius: 6px;
+    padding-left: 2rem;
+    padding-top: 2rem;
+}
+
+.variables-button {
+    display: block; /* Hidden by default */
+
+    position: fixed; /* Sit on top of the page content */
+    width:  24px; /* Full width (cover the whole page) */
+    height: 24px; /* Full height (cover the whole page) */
+    top: 2rem;
+    right: 2rem;
+    border-radius: 50%;
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    overflow: auto;
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #aaa;
+    border: 2px solid #777;
+    border-radius: 50%;   
+}

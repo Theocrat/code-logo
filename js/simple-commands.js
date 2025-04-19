@@ -107,6 +107,23 @@ function turtleCommand_sety(arg) {
     renderTurtle()
 }
 
+function turtleCommand_pc(arg) {
+    turtle.color = arg
+}
+
+function turtleCommand_goto(x_arg, y_arg) {
+    let oldX = turtle.x
+    let oldY = turtle.y
+    
+    turtle.x = parseFloat(x_arg)
+    turtle.y = -parseFloat(y_arg)
+    renderTurtle()
+
+    if (turtle.down) {
+        makeLineFrom(oldX, oldY)
+    }
+}
+
 const monadicCommands = {
     "ht": turtleCommand_ht,
     "st": turtleCommand_st,
@@ -121,7 +138,12 @@ const diadicCommands = {
     "rt": turtleCommand_rt,
     "lt": turtleCommand_lt,
     "setx": turtleCommand_setx,
-    "sety": turtleCommand_sety
+    "sety": turtleCommand_sety,
+    "pc": turtleCommand_pc
+}
+
+const triadicCommands = {
+    "goto": turtleCommand_goto
 }
 
 const variadicCommands = {

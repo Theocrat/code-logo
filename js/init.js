@@ -21,4 +21,6 @@ function initialize() {
 
     error = document.getElementById("error-box")
     picture = document.getElementById("picture")
+
+    interface.variablesPaneDisplayed = false
 }

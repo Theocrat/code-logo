@@ -55,6 +55,17 @@ function parse(tokens) {
         return returnedItem
     }
 
+    if (opcode in triadicCommands) {
+        let commandSequence = [{
+            "method": triadicCommands[opcode],
+            "arg_1": tokens[1],
+            "arg_2": tokens[2],
+        }]
+        let remainingText = tokens.slice(3)
+        let returnedItem = commandSequence.concat(parse(remainingText))
+        return returnedItem
+    }
+
     if (opcode in variadicCommands) {
         let commandSequence
         let remainingText
@@ -131,6 +142,10 @@ function execute() {
 
         else if ("target" in instruction) {
             instruction.method(instruction.target, instruction.value)
+        }
+
+        else if ("arg_1" in instruction) {
+            instruction.method(instruction.arg_1, instruction.arg_2)
         }
 
         else {

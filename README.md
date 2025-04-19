@@ -31,15 +31,15 @@ __repeat__ | `repeat (times) [(instructions)]` | Repeat *instructions* *times* t
 __make__ | `make (name) (expression)` | Assigned the value of *expression* to variable *name*
 __setx__ | `setx (value)` | Move the turtle to the x-coordinate *value*
 __sety__ | `setx (value)` | Move the turtle to the y-coordinate *value*
+__pc__ | `pc (color-code`) | Change the color of the lines. Color code can be a primary or secondary color name or a hex code. Default is black
+__goto__ | `goto (x) (y)` | Moves turtle to coordinates (x, y), and will leave a mark if pen is down
 
 ## Planned Work
 
 This is my TODO list – a set of things I want to implement next.
 
-  1. Implement a `goto` command, which can be used with pen down
-  2. Implement a `pc` color to set the pen color of the stroke
-  3. Implement a floating tab to print the values of variables.
-  4. Implement a floating tab to print a log of past commands executed.
+  1. Implement a floating tab to print a log of past commands executed.
+  2. Make the variables tab more aesthetic.
 
 **NOTE:** Only integer variable support has been implemented so far. Access the 7
 value of a variable using the colon operator. For instance, if the variable name

@@ -41,6 +41,7 @@ function makeLineFrom(x, y) {
     let lineCode = `
         <path class="line"
             d="M ${x},${y} ${turtle.x},${turtle.y}"
+            style="stroke:${turtle.color};"
         />
     `
     picture.innerHTML += lineCode
