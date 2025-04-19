@@ -32,6 +32,15 @@ __make__ | `make (name) (expression)` | Assigned the value of *expression* to va
 __setx__ | `setx (value)` | Move the turtle to the x-coordinate *value*
 __sety__ | `setx (value)` | Move the turtle to the y-coordinate *value*
 
+## Planned Work
+
+This is my TODO list – a set of things I want to implement next.
+
+  1. Implement a `goto` command, which can be used with pen down
+  2. Implement a `pc` color to set the pen color of the stroke
+  3. Implement a floating tab to print the values of variables.
+  4. Implement a floating tab to print a log of past commands executed.
+
 **NOTE:** Only integer variable support has been implemented so far. Access the 7
 value of a variable using the colon operator. For instance, if the variable name
 is `bear`, then its value is accessed using `:bear`
