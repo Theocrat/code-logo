@@ -43,7 +43,9 @@ __goto__ | `goto (x) (y)` | Moves turtle to coordinates (x, y), and will leave a
 This is my TODO list – a set of things I want to implement next.
 
   1. Implement a floating tab to print a log of past commands executed.
-  2. Make the variables tab more aesthetic.
+  2. Implement a floating tab of Logo instructions.
+  3. Enable zooming and scrolling the image with drag and mouse wheel.
+  4. Make the variables tab more aesthetic.
 
 **NOTE:** Only integer variable support has been implemented so far. Access the 7
 value of a variable using the colon operator. For instance, if the variable name
