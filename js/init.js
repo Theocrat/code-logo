@@ -4,6 +4,7 @@ function initialize() {
     command.addEventListener("keydown", e => {
         if(e.key == "Enter") { 
             commandStack.push(command.value)
+            lexAndLog(command.value)
             execute() 
         }
     })

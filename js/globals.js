@@ -23,8 +23,11 @@ var picture = null
 const commandStack = []
 
 const interface = {
-    "variablesPaneDisplayed": false
+    "variablesPaneDisplayed": false,
+    "instructionsDisplayed": false,
 }
+
+const commandLog = []
 
 function openRepo() {
     window.open("https://github.com/Theocrat/code-logo")

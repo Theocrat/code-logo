@@ -29,6 +29,58 @@ function generateTokensFromCommand(text) {
 }
 
 
+function lexAndLog(text) {
+    let tokens = generateTokensFromCommand(text)
+
+    while (tokens.length > 0) {
+        console.log(tokens[0])
+
+        if (tokens[0] in monadicCommands) {
+            loggingUnit.logCommand(tokens[0])
+            tokens = tokens.slice(1)
+        }
+
+        else if (tokens[0] in diadicCommands) {
+            loggingUnit.logCommand(tokens.slice(0, 2).join(" "))
+            tokens = tokens.slice(2)
+        }
+
+        else if (tokens[0] in triadicCommands) {
+            loggingUnit.logCommand(tokens.slice(0, 3).join(" "))
+            tokens = tokens.slice(2)
+        }
+
+        else if (tokens[0] == "repeat" && tokens[2] == "[") {
+            loggingUnit.logCommand(tokens.slice(0, 3).join(" "))
+            loggingUnit.incrementIndent()
+            tokens = tokens.slice(3)
+        }
+
+        else if (tokens[0] == "]") {
+            loggingUnit.decrementIndent()
+            loggingUnit.logCommand("]")
+            tokens = tokens.slice(1)
+        }
+
+        else if (tokens[0] == "make") {
+            if ("+-*/%".indexOf(tokens[3]) != -1) {
+                loggingUnit.logCommand(tokens.slice(0, 5).join(" "))
+                tokens = tokens.slice(5)
+            }
+
+            else {
+                loggingUnit.logCommand(tokens.slice(0, 3).join(" "))
+                tokens = tokens.slice(3)
+            }
+        }
+
+        else {
+            break
+        }
+    }
+}
+
+
 function parse(tokens) {
 
     if (tokens.length == 0) {
@@ -96,6 +148,8 @@ function parse(tokens) {
     }
 
     if (opcode == "repeat") {
+        loggingUnit.incrementIndent()
+
         let count = parseInt(tokens[1])
         let start = tokens.indexOf("[")
         let stop = start + getStopLocation(tokens.slice(start))
@@ -107,7 +161,6 @@ function parse(tokens) {
         }
 
         let codeBlock = tokens.slice(start + 1, stop)
-        console.log(codeBlock)
         let commandSequence = []
         for (let i = 0; i < count; i++) {
             commandSequence = commandSequence.concat(parse(codeBlock))
@@ -119,6 +172,8 @@ function parse(tokens) {
     }
 
     if (opcode == "]") {
+        loggingUnit.decrementIndent()
+
         let remainingText = tokens.slice(1)
         let returnedItem = parse(remainingText)
         return returnedItem

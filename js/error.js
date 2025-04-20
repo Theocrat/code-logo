@@ -3,6 +3,8 @@ function raiseError(message) {
     errorStatus.id = id
     errorStatus.message = message
 
+    loggingUnit.logError(message)
+
     error.innerHTML = message
     error.classList.remove("error-hide")
     error.classList.add("error-show")

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/hover-items.css"></link>
 
     <script type="text/javascript" src="js/globals.js"></script>
+    <script type="text/javascript" src="js/logging.js"></script>
     <script type="text/javascript" src="js/error.js"></script>
     <script type="text/javascript" src="js/simple-commands.js"></script>
     <script type="text/javascript" src="js/command.js"></script>
@@ -36,12 +37,121 @@
     <div id="error-box" class="error-hide">
     </div>
 
-    <div id="variables" class="variables">
+    <div id="variables" class="variables pane" onclick="toggleVariables()">
         <i style="color:#975;">No variables to show</i>
     </div>
 
-    <button onclick="toggleVariables()" class="variables-button">
+    <div id="command-log" class="log pane" onclick="toggleCommandLog()">
+        <i style="color:#597;">No commands to show</i>
+    </div>
+
+    <div id="instructions" class="instructions pane" onclick="toggleInstructions()">
+        <h3>Logo Commands</h3>
+        <p>
+            You can scroll down this blue instruction pane. 
+            Click anywhere on it to close the pane.
+        </p>
+        <table>
+            <tr>
+                <td colspan="2"><b>No Arguments</b></td>
+            </tr>
+            <tr> <td>pu</td> <td>Pen Up (stop drawing lines)</td> </tr>
+            <tr> <td>pd</td> <td>Pen Down (resume drawing)</td> </tr>
+            <tr> <td>ht</td> <td>Hide Turtle</td> </tr>
+            <tr> <td>ht</td> <td>Show Turtle</td> </tr>
+            <tr> <td>cs</td> <td>Clear Screen</td> </tr>
+
+            <tr>
+                <td colspan="2">&nbsp;<br/><b>One Argument</b></td>
+            </tr>
+            <tr> <td>fd N</td> <td>Move forward N points</td> </tr>
+            <tr> <td>bk N</td> <td>Go back N points</td> </tr>
+            <tr> <td>rt θ</td> <td>Turn Right θ degrees</td> </tr>
+            <tr> <td>lt θ</td> <td>Turn Left θ degrees</td> </tr>
+            <tr> <td>setx X</td> <td>Move turtle to x-coordinate X</td> </tr>
+            <tr> <td>sety Y</td> <td>Move turtle to y-coordinate Y</td> </tr>
+            <tr> <td>pc <em>-color-</em></td> <td>Set pen color</td> </tr>
+            <tr> 
+                <td>&nbsp;</td> 
+                <td>
+                    The argument <em>-color-</em> can be one of:
+                    <ol>
+                        <li>Neutrals: "black", "grey", or "white"</li>
+                        <li>Primaries: "red", "green", or "blue"</li>
+                        <li>Secondaries: "cyan", "magenta", or "yellow"</li>
+                        <li>A hexcode, like <code>$469</code></li>
+                    </ol>
+                </td> 
+            </tr>
+
+            <tr>
+                <td colspan="2">&nbsp;<br/><b>Other Commands</b></td>
+            </tr>
+            <tr>
+                 <td>goto X Y</td> 
+                <td>Go to position (X, Y), drawing a line if pen is down</td> 
+            </tr>
+            <tr>
+                <td>make <em>-name- -expression-</em> &nbsp;&nbsp;&nbsp;</td>
+                <td>Set a variable to a value.</td>
+            </tr>
+            <tr> 
+                <td>&nbsp;</td> 
+                <td>
+                    <ol>
+                        <li>The name of the variable is <em>-name-</em></li>
+                        <li>The value of the variable is <em>-expression-</em></li>
+                    </ol>
+                    <p>The expression can be one of two things:</p>
+                    <ol>
+                        <li>A constant, such as 2</li>
+                        <li>A single-operator expression, like 4 + 5</li>
+                    </ol>
+                    <p>The variables can be accessed with the colon (:) operator</p>
+                    <pre>
+                        make a 10
+                        make b 12
+                        make sum :a + :b
+                    </pre>
+                    <p></p>
+                </td> 
+            </tr>
+            <tr> 
+                <td>repeat N [...]</td> 
+                <td>Repeat a set of instructions N times.</td> 
+            </tr>
+            <tr> 
+                <td>&nbsp;</td> 
+                <td>
+                    <p>
+                        For instance, the following code draws a square
+                        of side 40 points:
+                    </p>
+                    <pre>
+                        repeat 4 [fd 40 rt 90]
+                    </pre>
+                    <p>
+                        The instructions to be repeated are placed one after
+                        another inside the square brackets. No separator is
+                        necessary. In this case, there are two instructions:
+                        an <code>fd 40</code> to draw a line of 40 points, and
+                        a <code>rt 90</code> to turn clockwise at a 90° angle.
+                    </p>
+                </td> 
+            </tr>
+        </table>
+    </div>
+
+    <button onclick="toggleVariables()" class="variables-button button">
         🔍
+    </button>
+
+    <button onclick="toggleInstructions()" class="instructions-button button">
+        ❓
+    </button>
+
+    <button onclick="toggleCommandLog()" class="log-button button">
+        📜
     </button>
 </body>
 </html>
