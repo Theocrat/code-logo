@@ -7,7 +7,7 @@ function evaluateToken(token) {
         raiseError(`Unknown variable: ${varname}`)
         return 0
     }
-    return parseInt(token)
+    return parseFloat(token)
 }
 
 function turtleCommand_ht() {
@@ -76,19 +76,19 @@ function turtleCommand_make(variableName, expression) {
         let operand = [expression[0], expression[2]].map(evaluateToken)
         switch (expression[1]) {
             case '+':
-                userVariables[variableName] = operand[0] + operand[1]
+                userVariables[variableName] = Math.round(operand[0] + operand[1])
                 break
             case '-':
-                userVariables[variableName] = operand[0] - operand[1]
+                userVariables[variableName] = Math.round(operand[0] - operand[1])
                 break
             case '*':
-                userVariables[variableName] = operand[0] * operand[1]
+                userVariables[variableName] = Math.round(operand[0] * operand[1])
                 break
             case '/':
-                userVariables[variableName] = operand[0] / operand[1]
+                userVariables[variableName] = Math.round(operand[0] / operand[1])
                 break
             case '%':
-                userVariables[variableName] = operand[0] % operand[1]
+                userVariables[variableName] = Math.round(operand[0] % operand[1])
                 break
             default:
                 raiseError(`Unexpected instruction: ${expression.join(" ")}`)

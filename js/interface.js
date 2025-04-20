@@ -15,7 +15,7 @@ function printVariableValues() {
 
     for (variable in userVariables) {
         let entry = `
-        <tr style="font-family:mono;">
+        <tr style="font-family:monospace,mono;">
             <td> ${variable}: </td>
             <td> ${userVariables[variable]} </td>
         </tr>`
