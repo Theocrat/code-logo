@@ -88,3 +88,17 @@ function toggleCommandLog() {
     document.querySelector("#variables").style.setProperty("display", "none")
     document.querySelector("#instructions").style.setProperty("display", "none")
 }
+
+function beginScrolling() {
+    mouse.x_base = mouse.x
+    mouse.y_base = mouse.y
+    
+    view.x_base = view.x
+    view.y_base = view.y
+    
+    mouse.scrolling = true
+}
+
+function endScrolling() {
+    mouse.scrolling = false
+}
