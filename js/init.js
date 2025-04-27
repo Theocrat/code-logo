@@ -28,8 +28,8 @@ function initialize() {
     drawing = document.getElementById("drawing")
 
     drawing.addEventListener("mousemove", function (event) {
-        mouse.x = event.offsetX
-        mouse.y = event.offsetY
+        mouse.x =  200 * event.offsetX / drawing.width.baseVal.value
+        mouse.y =  200 * event.offsetY / drawing.height.baseVal.value
 
         if (mouse.scrolling) {
             let displacement_x = mouse.x - mouse.x_base
