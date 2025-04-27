@@ -43,8 +43,7 @@ __goto__ | `goto (x) (y)` | Moves turtle to coordinates (x, y), and will leave a
 This is my TODO list – a set of things I want to implement next.
 
   1. Enable zooming and scrolling the image with drag and mouse wheel.
-  2. Command `turn θ` to turn turtle to a specific direction.
-  3. Tackle the problem of scrollbar on phone screen
+  2. Tackle the problem of scrollbar on phone screen
 
 **NOTE:** Only integer variable support has been implemented so far. Access the 7
 value of a variable using the colon operator. For instance, if the variable name

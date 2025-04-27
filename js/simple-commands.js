@@ -124,6 +124,11 @@ function turtleCommand_goto(x_arg, y_arg) {
     }
 }
 
+function turtleCommand_turn(arg) {
+    turtle.direction = -90 - arg
+    renderTurtle()
+}
+
 const monadicCommands = {
     "ht": turtleCommand_ht,
     "st": turtleCommand_st,
@@ -139,7 +144,8 @@ const diadicCommands = {
     "lt": turtleCommand_lt,
     "setx": turtleCommand_setx,
     "sety": turtleCommand_sety,
-    "pc": turtleCommand_pc
+    "pc": turtleCommand_pc,
+    "turn": turtleCommand_turn
 }
 
 const triadicCommands = {

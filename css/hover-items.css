@@ -45,7 +45,7 @@
     position: fixed; /* Sit on top of the page content */
     width:  36px; /* Full width (cover the whole page) */
     height: 36px; /* Full height (cover the whole page) */
-    top: 2rem;
+    top: 5rem;
     right: 2rem;
     border-radius: 50%;
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
@@ -58,7 +58,7 @@
     position: fixed; /* Sit on top of the page content */
     width:  36px; /* Full width (cover the whole page) */
     height: 36px; /* Full height (cover the whole page) */
-    top: 5rem;
+    top: 2rem;
     right: 2rem;
     border-radius: 50%;
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
